@@ -1,0 +1,143 @@
+%   |   flags	|	Minimum Field Width	|	Period	|	Precision (Max field width)	|	Argument type
+R		Opt			Opt						Opt			Opt								Required
+
+Flags : 
+	-		Left justif, no spaces left  (override flag 0)
+			ex :
+				printf("%- 10d\n", -1234); =>-1234
+				printf("%- 10d\n", 1234);  => 1234
+				printf("%-010d\n", -1234); =>-1234
+				printf("%-010d\n", 1234);  =>1234
+	0		Field with 0 istead of blank : Ignored if '-' and if precision on (d, i, o, u, x, X)
+				printf("%+010d\n", -1234) i=>-000001234
+				printf("%+010d\n", 1234); =>+000001234
+	+       Always show sign of number
+                 - Overide Blank
+				 - Undefined with conversion flags other than base10 => dont show +
+	blank   Positive Value begin with a blank (DEFAULT)
+                ex :
+	                  printf("%           d\n", -1234); =>-1234
+	                  printf("%           d\n", 1234);  => 1234
+	'		Pretty display big numbers ON  i, d, u, f, F, g, G
+				printf("%'d\n", 1123456789); => 1,123,456,789 	
+	#       Other Flags can be put before (IGNORE REST OF OPTIONS)
+			#o      Begin with 0 if not 0, Conversion OCTAL, when neg MAX_UIN - nbr + 1 (undefined behaviour)
+		                 => show 0 in front of non-zero VALUES
+			#x      0x prefix added to non-zero Values
+			#X      0X prefix added to non-zero Values
+			#e, #E, #f, #F, #g, #G BONUS
+			 
+ MINIMUM FIELD WIDTH
+		
+		MUST BE INT
+		printf("%+010d\n", -1234) i=>-000001234
+		printf("%+010d\n", 1234); =>+000001234
+
+		if FLAG - => writes the spaces right
+		if NEG => works as flag '-' + width
+
+		NEVER truncates
+
+		VARIABLE POSSIBLE
+		printf("---%*d----\n", 6, 5); => ----     5---
+						
+PERIOD + PRECISION
+	BEGIN PRECISION
+		default on int -> long = 1
+		default on float = 6
+		MUST BE INT
+		IF NEG => Default (1)
+		if just "." => 0
+		if 0 => If conversion is 0 ==> show nothing
+		- minimum number of digits to appear for d, i, o, u, x, X
+		- number of digits to appear after the radix character for a, A, e, E, f, F
+		- maximum number of significant digits for g, G
+		- maximum number of characters to be printed from a string for s and S
+
+		Asterix also possible for variable
+		WHEN NOT FLOAT AND NOT STR
+			=> FLAG 0 IGNORED !!!
+								
+LENGTH :    (hhhllljz) ONLY FOR CONV : d, i, o, u, x, X
+		hh :    signed char / unsigned char => [-128,127] / [0,256]
+		h  :    short int / unsigned short int => [–32768, 32767] / [0, 65535]
+		l  :    long int / unsigned long int
+		ll :    long long int / unsigned long long int
+		L  :    long double
+		j  :    intmax_t / uintmax_t
+		z  :    size_t / ssize_t
+
+
+CONVERSION : (sSpdDioOuUxXcC) BONUS eE, fF, gG, aA, n.
+	d,i	:	int				=> signed decimal  ( .00 => nothing)
+	o	:	unsigned int	=> Octal (base 8) (.00 => nothing)
+	u	:	unsigned int	=> unsigned decimal (.00 => nothing)
+	x	:	unsigned int	=> Unsigned Hexadecimal (minimalized) abcdef (.00 => nothing)
+	X	:	unsigned int	=> Unsigned Hexadecimal (MAXIMALIZED) ABCDEF (.00 => nothing)
+	e	:	double			=> Rounded & converted in (-)d.ddde+dd 
+								1 digit before point
+								.
+								nbr of digits after = precision size. 
+									If no precision given DEFAULT 6
+									if 0 precision show no decimals
+								+ / -
+								power 10 to put only one digit in front : 
+										- 0.00000321 => 3.21e-6
+										- 1932 => 1.932e3
+	E	:	double			=> like e but with exponent ?
+	f	:	double			=> ROUNDED !! converted to decimal (-)ddd.ddd precision gives number of decimal
+	F	:	double			=> same as f
+	g/G	:	double			=> e or f 
+								e : exponent after conversion  < -4 or  >= precision
+								f : other cases
+	a/A	:	double			=> converted to hex 0xh.hhhhp+/-	
+							=> http://www.exploringbinary.com/hexadecimal-floating-point-constants/
+							=> https://stackoverflow.com/questions/4826842/the-format-specifier-a-for-printf-in-c
+	c	 :	int				=> if no LENGTH l (ell) 
+								int	=> unsigned char
+							=> if LENGTH is l (ell)
+								wint_t => multiple sequence (see unicode file)
+	C	 : Synonym for %lc
+	s	 : 					=> If no LENGTH l (ell)
+								const char * => show carac until \0
+								precision : number of carac shown
+								if no precision or > len str, str must be ended with \0
+							if LENGTH l (ell)
+								wint_t => show all the array of wint_t
+	S	 : synonym for %ls
+	p	 : void *			=> printed in HEX ( like #x or #lx)	
+	n	 : int (or variant) *			=> nbr of carac written so far 
+										=> NO FLAGS, NO PRECISION, NO WIDTH
+	G, F, E, A => output INFINITY, INF, NAN instead of infinity, inf, nan for g f e a;
+	
+RETURN VAL : number of carac printed
+
+CHOSE A CHECK : 
+- $ => On all the string, 1st elem conversion than the rest in order=> 
+- *
+- Overrides
+- double %
+- VERIFIER lenght  Z
+
+Structure : 
+- rajouter fonction de conversion dans libft
+- Une structure de Flags {int left, int zero, int plus, int hash}
+- Structure de UNICODE UTF-8 
+	- int min
+	- int max
+	- char *masque
+	ex : 	{0 , 127, "0xxxxxxx"}
+			{128, 2047, "110xxxxx 10xxxxxx"}
+			{2048, 65535,"1110xxxx 10xxxxxx 10xxxxxx"}
+			{65536, 1114111,"11110xxx 10xxxxx 10xxxxxx 10xxxxxx"}
+
+- Une structure d Info sur un % 
+	Flags => struct Flags
+	Width => int
+	Precision => Int
+	Length => char * ( ou size_t)
+	Conversion
+
+ASTUCE : 
+- Enum pour les couleurs
+

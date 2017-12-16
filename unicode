@@ -1,0 +1,9 @@
+1. Store information in INT
+
+2. get masque out of UTF_8 struct 
+
+3. Convert to binary (count number of bite ?)
+4. put on masque
+5. convert byte per byte to decimal
+6. put each in array of int
+7. putchar number by number
