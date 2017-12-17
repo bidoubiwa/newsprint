@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 17:10:45 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 18:07:08 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:43:08 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,42 @@
 
 ///static char		*ft_3_bytes(wchar_t wc, )
 
-static char		*ft_w_char_handler(wchar_t wc)
+int				ft_null_w_char(t_chain *elem)
+{
+	char	*byte;
+	
+	if ((elem->conv == 'C' || (elem->conv == 'c' && elem->len == 'l')))
+	{
+		byte = ft_strtrim(elem->show);
+		if (ft_strequ(byte,"0"))
+		{
+			if (!(elem->flag)->left && elem->width > 0)
+				write(1, elem->show, elem->width - 1);
+			write(1,"\0",1);
+			if ((elem->flag)->left && elem->width > 0)
+				write(1, elem->show, elem->width - 1);
+			elem->nbr_carac = (elem->width > 0) ? elem->width : 1;
+			free(byte);
+			return (1);
+		}
+		free(byte);
+		return (0);
+	}
+	return (0);
+}
+
+int				ft_is_w_char(t_chain *elem)
+{
+	if (elem->conv == 'c' && elem->len == 'l')
+		return (1);
+	else if (elem->conv == 's' && elem->len == 'l')
+		return (1);
+	else if (elem->conv == 'S' || elem->conv == 'C')
+		return (1);
+	return (0);
+}
+
+static char		*ft_w_char_handler(wchar_t wc, t_chain *elem)
 {
 	char			*bin;
 	unsigned long	x;
@@ -43,6 +78,8 @@ static char		*ft_w_char_handler(wchar_t wc)
 		bin = ft_strjoin_clr(bin, f(((wc >> 6) & 0x3f) + 0x80, 2));
 		bin = ft_strjoin_clr(bin, f((wc & 0x3F) + 0x80, 2));
 	}
+	if (bin)
+		elem->nbr_carac += (ft_strlen(bin) / 8 == 0) ? 1 : ft_strlen(bin) / 8;
 	return (bin);
 }
 
@@ -52,9 +89,8 @@ int				ft_str_w_handler(t_chain *elem, va_list ap)
 
 	if (elem->conv == 'C' || (elem->conv == 'c' && elem->len == 'l'))
 	{
-		if (!(elem->show = ft_w_char_handler(va_arg(ap, wchar_t))))
+		if (!(elem->show = ft_w_char_handler(va_arg(ap, wchar_t), elem)))
 			return (-1);
-		elem->nbr_carac = ft_strlen(elem->show) / 8;
 	}
 	else if (elem->conv == 'S')
 	{
@@ -63,9 +99,9 @@ int				ft_str_w_handler(t_chain *elem, va_list ap)
 		while (*sw)
 		{
 			if (!(elem->show = ft_strjoin_clr(elem->show,
-							ft_w_char_handler(*sw))))
+							ft_w_char_handler(*sw, elem))))
 				return (-1);
-			elem->nbr_carac = ft_strlen(elem->show) / 8;
+//			printf("nbr : %zu\n", elem->nbr_carac);
 			sw++;
 		}
 	}

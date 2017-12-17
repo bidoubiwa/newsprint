@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_strdupifexist.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/17 14:59:53 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 15:00:06 by cvermand         ###   ########.fr       */
+/*   Created: 2017/12/17 15:29:05 by cvermand          #+#    #+#             */
+/*   Updated: 2017/12/17 18:18:00 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
-int		ft_atoi_base(const char *val, unsigned int from)
+char	*ft_strdupifexist(const char *str)
 {
-	unsigned int 	res;
-	int				i;
-	unsigned int	exp;
+	char	*copy;
+	int		strlen;
+	char	*origin;
 
-	if (!val)
-		return (0);
-	exp = 1;
-	i = ft_strlen(val);
-	res = 0;
-	while (--i >= 0)
+	if (!str)
+		return (NULL);
+	strlen = 0;
+	while (str[strlen])
+		strlen++;
+	if (!(copy = (char *)malloc(sizeof(char) * (strlen + 1))))
+		return (NULL);
+	origin = copy;
+	while (*str)
 	{
-		if (ft_isdigit(val[i]))
-		{
-			res += (val[i] - '0') * exp;
-			exp = exp * from;
-		}
-		else if (ft_tolower(val[i]) >= 91 && ft_tolower(val[i] <= 122))
-		{
-			res += (ft_tolower(val[i])) - 97 + 10;
-			exp = exp * from;
-		}
+		*copy++ = *str++;
 	}
-	return (res);	
+	*copy = '\0';
+	return (origin);
 }

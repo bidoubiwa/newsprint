@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 10:51:07 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 17:05:42 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 19:03:28 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ int		ft_get_base(char c)
 
 char	*ft_start_digit(char *str)
 {
-	if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
-		return (&str[2]);
-	else if (str[0] == '-' || str[0] == '+' || str[0] == '0')
-		return (&str[1]);
+	if (str[0] && str[1])
+	{
+		if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
+			return (&str[2]);
+		else if (str[0] == '-' || str[0] == '+' || str[0] == '0' || str[0] == ' ')
+			return (&str[1]);
+	}
 	return (str);
 }
 

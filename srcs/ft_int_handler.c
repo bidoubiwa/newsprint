@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 17:47:31 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 16:48:15 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:28:20 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static int		ft_int_modifier(t_chain *elem)
 
 	flag = elem->flag;
 	if (flag->plus)
-		elem->show = ft_plus(elem);
+		elem->show = ft_plus(elem, '+');
+	if (!flag->plus && flag->blank)
+		elem->show = ft_plus(elem, ' ');
 	if (flag->hash || elem->conv == 'p')
 		elem->show = ft_hash(elem);
 	if (elem->maj)
@@ -63,13 +65,11 @@ int				ft_uint_handler(t_chain *elem, va_list ap)
 
 	new = NULL;
 	base = ft_get_base(elem->conv);
-	if ((!elem->len || elem->len == 'L') && elem->conv != 'p')
-		new = ft_itoa_base(va_arg(ap, unsigned int), base);
-	else if (elem->len == 'h')
+	if (elem->len == 'h' && elem->conv != 'U')
 		new = ft_itoa_base((unsigned short)va_arg(ap, unsigned int), base);
-	else if (elem->len == 'H')
+	else if (elem->len == 'H' && elem->conv != 'U')
 		new = ft_itoa_base((unsigned char)va_arg(ap, unsigned int), base);
-	else if (elem->len == 'l' || elem->conv == 'p')
+	else if (elem->len == 'l' || elem->conv == 'p' || elem->conv == 'U' || elem->conv == 'O')
 		new = ft_itoa_base_ll(va_arg(ap, unsigned long), base);
 	else if (elem->len == 'm')
 		new = ft_itoa_base_ll(va_arg(ap, unsigned long long), base);
@@ -77,6 +77,8 @@ int				ft_uint_handler(t_chain *elem, va_list ap)
 		new = ft_itoa_base_ll(va_arg(ap, uintmax_t), base);
 	else if (elem->len == 'z')
 		new = ft_itoa_base_ll(va_arg(ap, size_t), base);
+	else 
+		new = ft_itoa_base(va_arg(ap, unsigned int), base);
 	if (new)
 		elem->show = new;
 	else

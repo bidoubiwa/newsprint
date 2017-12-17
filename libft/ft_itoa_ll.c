@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:35:14 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/10 15:56:00 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 19:16:12 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ static int			ft_len_int(long long n)
 
 char				*ft_itoa_ll(long long n)
 {
-	int				sign;
-	long long		x;
-	long long		len;
-	char			*res;
-	int				y;
+	int						sign;
+	unsigned long long		x;
+	long long				len;
+	char					*res;
+	int						y;
 
 	y = 0;
 	sign = (n < 0) ? 1 : 0;

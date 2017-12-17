@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 18:55:58 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/10 14:08:22 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 15:31:36 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *str);
+char				*ft_strdupifexist(const char *str);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isprint(int c);
@@ -43,6 +44,7 @@ int					ft_isdigit(int c);
 int					ft_isalpha(int c);
 int					ft_atoi(const char *str);
 int					ft_atoi_base(const char *str, unsigned int from);
+unsigned long		ft_atoi_base_ll(const char *str, unsigned int from);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strstr(const char *haystack, const char *needle);

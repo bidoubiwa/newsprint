@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:03:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 16:53:13 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:25:35 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,14 @@ int					ft_uint_handler(t_chain *elem, va_list ap);
 int					ft_str_handler(t_chain *elem, va_list ap);
 int					ft_str_w_handler(t_chain *elem, va_list ap);
 int					ft_percent_handler(t_chain *elem, va_list ap);
+int					ft_null_w_char(t_chain *elem);
 /* FLAG FUNCTIONS  */
-char				*ft_plus(t_chain *elem);
+char				*ft_plus(t_chain *elem, char c);
 char				*ft_precision(t_chain *elem);
 char				*ft_width(t_chain *elem, t_flag *flag);
 char				*ft_maj(t_chain *elem);
+char				*ft_0x_hexa(char *show, char c);
+char				*ft_0_octal(char *show);
 char				*ft_hash(t_chain *elem);
 int					ft_str_modifier(t_chain *elem, t_flag *flag);
 /* CHAINED LIST FUNCTIONS */
@@ -101,6 +104,7 @@ int					ft_is_integer(char b);
 char				*ft_start_digit(char *str);
 int					ft_get_base(char c);
 int					ft_need_toupper(char c);
+int					ft_is_w_char(t_chain *elem);
 // A SUPPRIMER
 void				show_maillon(t_chain *tmp);
 /*int					ft_oct_handler(t_chain *elem);
@@ -138,7 +142,9 @@ static t_conv	g_conv[] =
 	{'D', &ft_int_handler},
 	{'i', &ft_int_handler},
 	{'u', &ft_uint_handler},
+	{'U', &ft_uint_handler},
 	{'o', &ft_uint_handler},
+	{'O', &ft_uint_handler},
 	{'x', &ft_uint_handler},
 	{'X', &ft_uint_handler},
 	{'s', &ft_str_handler},

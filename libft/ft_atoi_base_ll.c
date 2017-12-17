@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_atoi_base_ll.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/17 14:59:53 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 15:00:06 by cvermand         ###   ########.fr       */
+/*   Created: 2017/12/17 14:59:35 by cvermand          #+#    #+#             */
+/*   Updated: 2017/12/17 15:01:19 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 
-int		ft_atoi_base(const char *val, unsigned int from)
+unsigned long	ft_atoi_base_ll(const char *val, unsigned int from)
 {
-	unsigned int 	res;
+	unsigned long	res;
 	int				i;
-	unsigned int	exp;
+	unsigned long	exp;
 
 	if (!val)
 		return (0);

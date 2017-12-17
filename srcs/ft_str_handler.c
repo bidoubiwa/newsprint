@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 17:07:26 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 17:07:29 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 18:19:05 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_str_modifier(t_chain *elem, t_flag *flag)
 {
 	if (!elem->show)
 		return (0);
-	if (elem->give_p)
+	if (elem->give_p && elem->conv != 'c')
 		elem->show = ft_precision(elem);
 	if (elem->width > elem->nbr_carac)
 		elem->show = ft_width(elem, flag);
@@ -26,16 +26,25 @@ int		ft_str_modifier(t_chain *elem, t_flag *flag)
 int		ft_str_handler(t_chain *elem, va_list ap)
 {
 	char		c;
-
-	if (elem->conv == 's' && elem->len != 'l')
+	
+	if (elem->len == 'l')
+		return (ft_str_w_handler(elem, ap));
+	else if (elem->conv == 's')
 	{
-		elem->show = ft_strdup(va_arg(ap, char *));
+		if (!(elem->show = ft_strdupifexist(va_arg(ap, char *))))
+			elem->show = ft_strdup("(null)");
 		elem->nbr_carac = ft_strlen(elem->show);
 	}
-	else if (elem->conv == 'c' && elem->len != 'l')
+	else if (elem->conv == 'c')
 	{
 		c = va_arg(ap, int);
-		elem->show = ft_strdup(&c);
+		if (c == '\0')
+			elem->show = ft_strnew(0);
+		else 
+		{
+			elem->show = ft_strnew(1);
+			elem->show[0] = c;
+		}
 		elem->nbr_carac = 1;
 	}
 	else

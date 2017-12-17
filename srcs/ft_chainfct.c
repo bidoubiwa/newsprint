@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 13:43:46 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 16:28:24 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 17:12:31 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			ft_setup_chain_info(t_chain *elem, t_flag *flag)
 	elem->width = 0;
 	elem->give_p = 0;
 	elem->prec = 0;
-	elem->len = 0;
+	elem->len = '\0';
 	elem->maj = 0;
 	elem->pdol = 0;
 	elem->conv = 0;

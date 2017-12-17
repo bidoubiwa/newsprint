@@ -6,11 +6,21 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:03 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 17:01:52 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/17 19:09:22 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hprintf.h"
+
+static int	ft_prec_null_str_null(t_chain *elem)
+{
+	if (ft_strequ(elem->show, "(null)")  && elem->prec == '0')
+	{
+		free(elem->show);
+		return (1);
+	}
+	return (0);
+}
 
 static char	*ft_prec_on_str(t_chain *elem)
 {
@@ -18,6 +28,8 @@ static char	*ft_prec_on_str(t_chain *elem)
 	size_t	len;
 	size_t	i;
 
+	if (ft_prec_null_str_null(elem))
+		return (ft_strnew(0));
 	if (elem->prec < ft_strlen(elem->show))
 	{
 		i = 0;
@@ -34,6 +46,20 @@ static char	*ft_prec_on_str(t_chain *elem)
 	return (elem->show);
 }
 
+static int	ft_prec_null_val_null(t_chain *elem)
+{
+	int base;
+
+	base = ft_get_base(elem->conv);
+	if (elem->prec == 0 &&  !((elem->flag)->hash && elem->conv == 'o')
+			&& ft_atoi_base_ll(elem->show, base) == 0)
+	{
+		free(elem->show);
+		return (1);
+	}
+	return (0);
+}
+
 static char	*ft_prec_on_integer(t_chain *elem)
 {
 	char	*tmp;
@@ -44,6 +70,9 @@ static char	*ft_prec_on_integer(t_chain *elem)
 
 	i = 0;
 	y = 0;
+	(elem->flag)->zero = 0;
+	if (ft_prec_null_val_null(elem))
+		return (ft_strnew(0));
 	tmp = ft_start_digit(elem->show);
 	len_src = ft_strlen(tmp);
 	if (elem->prec > len_src)
