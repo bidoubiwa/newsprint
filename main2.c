@@ -6,28 +6,37 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 09:35:07 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 18:54:14 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:22:18 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-
+#include <unistd.h>
 int		main(int ac, char **av)
 {
-
+	char c;
+	c = 'a';
 /*	int len = 123456789;
 	short x = (short) len;
 	int n;
-	double f = 100010.9999;
+	double f = 100010.9999; */
 	char *locale;
-
 	locale = setlocale(LC_ALL, "");
+	int a;
+	a = 224;
+	write(1,&(a),1);
+	a = 175;
+	write(1,&(a),1);
+	a = 174;
+	write(1,&(a),1);
+
+	//write(1,&c, 5);	
 //	printf("TOTAL : %d\n", printf("%0-10.5d",12345));
-	int result = printf("%C\n", 0x11ffff);
-	printf("%d\n", result);
-	n = 0;*/
+//	int result = printf("%C\n", 0x11ffff);
+//	printf("%d\n", result);
+//	n = 0;*/
 	//len = printf("char : %C\n", 65280);
 	//printf("len : %d\n");
 /*	printf("TOTAL : %d\n", len);
@@ -78,7 +87,7 @@ int		main(int ac, char **av)
 	//len = printf("%f\n int : %d\n float : %f\nres : %d\n", x, (z =(int) x), (z = (float) z), (15 == 14));
 	//printf("%d", atoi("99999999999999999"));
 //	dprintf(1, "retour printf = %d\n", len);
-	/*printf(" 10.9999 : %a \n",f);
+	printf(" 10.9999 : %a \n",f);
 	printf(" 10.9999 : %A \n",f);
 
 	f = 10123456789.1234567899999;

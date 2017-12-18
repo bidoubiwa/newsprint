@@ -6,7 +6,7 @@
 #    By: cvermand <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/08 08:28:21 by cvermand          #+#    #+#              #
-#    Updated: 2017/12/17 19:12:41 by cvermand         ###   ########.fr        #
+#    Updated: 2017/12/18 21:10:23 by cvermand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS		= 	-Wall -Werror -Wextra
 _SRC 		= 	ft_handler.c ft_parser.c ft_int_handler.c ft_printf.c \
 	  			ft_chainfct.c ft_error_handler.c ft_flags.c ft_recognize.c \
 	  			ft_precision.c ft_width.c ft_str_handler.c ft_str_w_handler.c \
-				ft_parser_flags.c ft_conversion_symbols.c
+				ft_parser_flags.c ft_conversion_symbols.c ft_extend_w_char.c
 
 _LSRC 		=	ft_putchar.c ft_putstr.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 	  			ft_strlen.c ft_strdup.c ft_tolower.c ft_toupper.c ft_isprint.c \
@@ -33,7 +33,7 @@ _LSRC 		=	ft_putchar.c ft_putstr.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy
 	  			ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_strdel.c ft_lstaddafter.c \
 	  			ft_lstswap.c ft_listmerge.c ft_lstlast.c ft_lstsize.c ft_itoa_ll.c \
 	  			ft_match.c ft_itoa_base.c ft_itoa_base_ll.c ft_strjoin_clr.c \
-	  			ft_atoi_base.c ft_atoi_base_ll.c ft_strdupifexist.c
+	  			ft_atoi_base.c ft_atoi_base_ll.c ft_strdupifexist.c ft_strtrim_c.c \
 
 PRINTF_DIR	= srcs
 LIBFT_DIR	= libft

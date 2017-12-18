@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 17:47:31 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 20:28:20 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:27:10 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int				ft_int_handler(t_chain *elem, va_list ap)
 	new = NULL;
 	if ((!elem->len || elem->len == 'L') && elem->conv != 'D')
 		new = ft_itoa(va_arg(ap, int));
-	else if (elem->len == 'h')
+	else if (elem->len == 'h' && elem->conv != 'D')
 		new = ft_itoa_ll((short)va_arg(ap, int));
-	else if (elem->len == 'H')
+	else if (elem->len == 'H' && elem->conv != 'D')
 		new = ft_itoa((char)va_arg(ap, int));
 	else if (elem->len == 'l' || elem->conv == 'D')
 		new = ft_itoa_ll(va_arg(ap, long));
@@ -58,6 +58,13 @@ int				ft_int_handler(t_chain *elem, va_list ap)
 	return (ft_int_modifier(elem));
 }
 
+static int		ft_exception_uint(char c)
+{
+	if (c == 'U' || c == 'O' || c == 'p')
+		return (1);
+	return (0);
+}
+
 int				ft_uint_handler(t_chain *elem, va_list ap)
 {
 	char		*new;
@@ -65,11 +72,11 @@ int				ft_uint_handler(t_chain *elem, va_list ap)
 
 	new = NULL;
 	base = ft_get_base(elem->conv);
-	if (elem->len == 'h' && elem->conv != 'U')
+	if (elem->len == 'h' && !ft_exception_uint(elem->conv))
 		new = ft_itoa_base((unsigned short)va_arg(ap, unsigned int), base);
-	else if (elem->len == 'H' && elem->conv != 'U')
+	else if (elem->len == 'H' && !ft_exception_uint(elem->conv))
 		new = ft_itoa_base((unsigned char)va_arg(ap, unsigned int), base);
-	else if (elem->len == 'l' || elem->conv == 'p' || elem->conv == 'U' || elem->conv == 'O')
+	else if (elem->len == 'l' || ft_exception_uint(elem->conv))
 		new = ft_itoa_base_ll(va_arg(ap, unsigned long), base);
 	else if (elem->len == 'm')
 		new = ft_itoa_base_ll(va_arg(ap, unsigned long long), base);

@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 18:45:57 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 20:20:32 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:22:05 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_hash(t_chain *elem)
 	c = elem->conv;
 	if (ft_tolower(c) == 'x' || elem->conv == 'p')
 		return (ft_0x_hexa(elem->show, elem->conv));
-	else if (c == 'o')
+	else if (ft_tolower(c) == 'o')
 		return (ft_0_octal(elem->show));
 	return (elem->show);
 }

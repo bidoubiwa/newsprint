@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:49 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 18:29:22 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 20:30:50 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,22 @@ static char		*ft_write_after(char *new, t_chain *elem)
 static char		*ft_width_w_char(t_chain *elem, t_flag *flag)
 {
 	size_t	len;
-	size_t	real_size;
 	char	*new;
 	size_t	i;
 	size_t	y;
 
 	i = 0;
 	y = 0;
-	real_size = ft_strlen(elem->show) / 8;
-	len = elem->width + ft_strlen(elem->show) - real_size;
+	len = elem->width + ft_strlen(elem->show) - elem->nbr_carac;
 	if (!(new = ft_strnew(len)))
 		return (NULL);
-	while (!flag->left && i < (elem->width - real_size))
+	while (!flag->left && i < (elem->width - elem->nbr_carac))
 		new[i++] = ' ';
 	while (elem->show[y])
 		new[i++] = elem->show[y++];
 	while (flag->left && i < len)
 		new[i++] = ' ';
+	elem->nbr_carac = elem->width;
 	free(elem->show);
 	return (new);
 }
@@ -89,7 +88,8 @@ char			*ft_width(t_chain *elem, t_flag *flag)
 {
 	char	*new;
 
-	if (elem->conv == 'C' || elem->conv == 'S')
+	if (elem->conv == 'C' || elem->conv == 'S' || ((elem->conv == 's'
+					|| elem->conv == 'c') && elem->len == 'l'))
 		return (ft_width_w_char(elem, flag));
 	if (!(new = ft_strnew(elem->width)))
 		return (elem->show);
@@ -97,8 +97,10 @@ char			*ft_width(t_chain *elem, t_flag *flag)
 		return (ft_write_after(new, elem));
 	else
 	{
-		if (flag->zero && ft_is_integer(elem->conv))
+		if (flag->zero)
+		{
 			return (ft_write_before_zero(new, elem));
+		}
 		else
 			return (ft_write_before_space(new, elem));
 	}

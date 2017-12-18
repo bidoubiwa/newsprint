@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 13:43:46 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 17:12:31 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 19:53:01 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void			ft_setup_chain_info(t_chain *elem, t_flag *flag)
 	flag->zero = 0;
 	flag->apos = 0;
 	flag->hash = 0;
-	flag->star = 0;
-	flag->wdol = 0;
 	elem->just_show = 0;
 	elem->nbr_carac = 0;
 	elem->width = 0;
@@ -29,7 +27,7 @@ void			ft_setup_chain_info(t_chain *elem, t_flag *flag)
 	elem->prec = 0;
 	elem->len = '\0';
 	elem->maj = 0;
-	elem->pdol = 0;
+	elem->cnull = 1;
 	elem->conv = 0;
 	elem->show = NULL;
 	elem->next = NULL;

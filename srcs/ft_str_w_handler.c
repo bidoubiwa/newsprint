@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 17:10:45 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 20:43:08 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 20:22:29 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ static char		*ft_w_char_handler(wchar_t wc, t_chain *elem)
 	f = &ft_itoa_base_ll;
 	i = 0;
 	if (wc <= 127 && MB_CUR_MAX > 0)
-		bin = ft_itoa_base(wc, 2);
+	{
+		bin = ft_itoa_base(wc + 0x80, 2);
+		bin[0] = '0';
+	}
 	else if (wc <= 2047 && MB_CUR_MAX > 1)
 		bin = ft_strjoin_clr(ft_itoa_base((wc >> 6) + 0xC0, 2),
 				ft_itoa_base((wc & 0x3F) + 0x80, 2));
@@ -92,18 +95,28 @@ int				ft_str_w_handler(t_chain *elem, va_list ap)
 		if (!(elem->show = ft_w_char_handler(va_arg(ap, wchar_t), elem)))
 			return (-1);
 	}
-	else if (elem->conv == 'S')
+	else if (elem->conv == 'S' ||  (elem->conv == 's' && elem->len == 'l'))
 	{
 		sw = va_arg(ap, wchar_t *);
-		elem->show = ft_strnew(0);
-		while (*sw)
+		if (!sw)
 		{
-			if (!(elem->show = ft_strjoin_clr(elem->show,
-							ft_w_char_handler(*sw, elem))))
-				return (-1);
-//			printf("nbr : %zu\n", elem->nbr_carac);
-			sw++;
+			elem->show = ft_strdup("(null)");
+			elem->nbr_carac = ft_strlen(elem->show);
+			elem->conv = 's';
+			elem->len = 0;
+		}
+		else 
+		{
+			elem->show = ft_strnew(0);
+			while (*sw)
+			{
+				if (!(elem->show = ft_strjoin_clr(elem->show,
+								ft_w_char_handler(*sw, elem))))
+					return (-1);
+				sw++;
+			}
 		}
 	}
+	elem->nbr_byte = elem->nbr_carac;
 	return (ft_str_modifier(elem, elem->flag));
 }

@@ -6,19 +6,20 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 08:35:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 20:52:46 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:29:34 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/hprintf.h"
 #include <stdio.h>
 #include <locale.h>
+#include <limits.h>
 int		main(void)
 {
 	char 	*locale;
 	int		len;
 
-	locale = setlocale(LC_ALL,"en_US.UTF-8");
+	locale = setlocale(LC_ALL,"");
 //	ft_printf("CHIFFRE : %C\n", L'漢');
 //	ft_printf("CHIFFRE : %jd\n", 65280);
 //	ft_printf("CHIFFRE : %zd\n", 123456789123456);
@@ -39,12 +40,38 @@ int		main(void)
 		L"Ν ν", L"Ξ ξ", L"Ο ο", L"Π π", L"Ρ ρ", L"Σ σ", L"Τ τ", L"Υ υ", L"Φ φ", L"Χ χ", L"Ψ ψ", L"Ω ω", L"");
 	printf("len : %d\n", len);
 	*/
-	
-	
-	len = ft_printf("FAX : %S\n", L"Α α");
+
+//	printf("%.100*s|\n",-100,"hahahaha");
+
+
+	/*len = ft_printf("%.0p, %.p\n", 0, 0);
 	printf("len : %d\n", len);
-	len = printf("VRAI : %S\n", L"Α α");
+	len = ft_printf("%#.0x, %#.x\n", 0, 0);
 	printf("len : %d\n", len);
+	len = printf("%.0p, %.p\n", 0, 0);
+	printf("len : %d\n", len);
+	len = ft_printf("%#.0x, %#.x\n", 0, 0);
+	printf("len : %d\n", len);
+	
+	len = ft_printf("%.4S", L"我是一只猫。");
+	printf("len : %d\n", len);
+	len = printf("%.4S", L"我是一只猫。");
+	printf("len : %d\n", len);
+	*/
+	/* UNDEFINED BEHAVIOR */
+/*	len = printf("{%05p}", (void*) &len);
+	len = printf("{%05p}", 0);
+	len = printf("{%030S}", L"我是一只猫。");	
+	len = printf("{%05s}", "abc");
+
+*/
+	ft_printf("%-30d %-30d %-30d\n%-30d %-30d %-30d\n", 123, 456, 789, 1235, 58962,123875);
+	len = ft_printf("{%10.3S}\n是一只猫", L"我是一只猫。");
+	printf("len : %d\n", len);
+	len = printf("{%.1S}\n", L"我是一只猫。");
+	printf("len : %d\n", len);
+//	len = printf("{%S}\n", L"我是一只猫。");
+//	printf("len : %d\n", len);
 	
 //	len = ft_printf("@OCTAL faux: %5.o %5.0o\n", 0, 0);
 //	printf("len : %d\n", len);
@@ -58,7 +85,7 @@ int		main(void)
 
 //	ft_printf("coucou 漢字: %100S|\n", L"漢漢字漢字漢字漢字漢字字");
 //	printf("coucou 漢字: %100S|\n",  L"漢漢字漢字漢字漢字漢字字");
-	//ft_printf("coucou : %C\n", 28450);
+	ft_printf("coucou : %C\n", 28450);
 
 	//printf("coucou");
 	//printf("coucou : %10S\n", L"漢字");

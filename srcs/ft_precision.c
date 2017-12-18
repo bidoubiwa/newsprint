@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:03 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 19:09:22 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:16:33 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char	*ft_prec_on_str(t_chain *elem)
 			new[i] = elem->show[i];
 			i++;
 		}
+		elem->nbr_carac = ft_strlen(new);
 		return (new);
 	}
 	return (elem->show);
@@ -51,7 +52,7 @@ static int	ft_prec_null_val_null(t_chain *elem)
 	int base;
 
 	base = ft_get_base(elem->conv);
-	if (elem->prec == 0 &&  !((elem->flag)->hash && elem->conv == 'o')
+	if (elem->prec == 0 &&  !((elem->flag)->hash && ft_tolower(elem->conv) == 'o')
 			&& ft_atoi_base_ll(elem->show, base) == 0)
 	{
 		free(elem->show);
@@ -95,7 +96,9 @@ char		*ft_precision(t_chain *elem)
 {
 	if (ft_is_integer(elem->conv))
 		return (ft_prec_on_integer(elem));
-	if (elem->conv == 's')
+	else if (elem->conv == 's' && elem->len != 'l')
 		return (ft_prec_on_str(elem));
+//	else if (elem->conv == 'S' || (elem->len == 'l' && elem->conv == 's'))
+//		return (ft_prec_on_w(elem));
 	return (elem->show);
 }

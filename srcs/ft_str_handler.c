@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 17:07:26 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 18:19:05 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 17:28:39 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_str_modifier(t_chain *elem, t_flag *flag)
 int		ft_str_handler(t_chain *elem, va_list ap)
 {
 	char		c;
-	
+
 	if (elem->len == 'l')
 		return (ft_str_w_handler(elem, ap));
 	else if (elem->conv == 's')
@@ -39,12 +39,9 @@ int		ft_str_handler(t_chain *elem, va_list ap)
 	{
 		c = va_arg(ap, int);
 		if (c == '\0')
-			elem->show = ft_strnew(0);
-		else 
-		{
-			elem->show = ft_strnew(1);
-			elem->show[0] = c;
-		}
+			elem->cnull = 0;
+		elem->show = ft_strnew(elem->cnull);
+		elem->show[0] = c;
 		elem->nbr_carac = 1;
 	}
 	else

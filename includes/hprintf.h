@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:03:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 20:25:35 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 21:09:13 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,28 @@
 
 typedef	struct	s_flag
 {
-	int				left;
-	int				blank;
-	int				plus;
-	int				zero;
-	int				apos;
-	int				hash;
-	int				star;
-	int				wdol;
+	int				left; // FLAG -
+	int				blank; // FLAG ' '
+	int				plus; // FLAG + 
+	int				zero; // FLAG 0
+	int				apos; // FLAG ' NON GERER
+	int				hash; // FLAG #
 }					t_flag;
 
 typedef struct	s_chain
 {
 	t_flag			*flag;
-	int				just_show;
-	size_t			width;
-	size_t			nbr_carac;
-	int				give_p;
-	size_t			prec;
-	char			len;
-	char			conv;
-	int				maj;
-	int				pdol;
-	int				cdol;
-	int				(*f)(struct s_chain *, va_list ap);
+	int				just_show; // JUSTE AFFICGE
+	size_t			width; // WIDTH
+	size_t			nbr_carac; // LEN FINAL
+	size_t			nbr_byte;
+	int				give_p; // PRECISION DONNEE
+	size_t			prec; // PRECISION
+	char			len; // MODIFIER DE CONVERSION
+	char			conv; // CONVERSION 
+	int				maj; // MAJ
+	char			cnull; // CARACTERER NULL
+	int				(*f)(struct s_chain *, va_list ap); // PTR DE FONCTION
 	char			*show;
 	struct s_chain	*next;
 }					t_chain;
@@ -83,6 +81,7 @@ int					ft_str_handler(t_chain *elem, va_list ap);
 int					ft_str_w_handler(t_chain *elem, va_list ap);
 int					ft_percent_handler(t_chain *elem, va_list ap);
 int					ft_null_w_char(t_chain *elem);
+char				*ft_prec_on_w(t_chain *elem);
 /* FLAG FUNCTIONS  */
 char				*ft_plus(t_chain *elem, char c);
 char				*ft_precision(t_chain *elem);

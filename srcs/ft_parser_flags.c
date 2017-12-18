@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:49:08 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/16 17:00:39 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/18 19:54:32 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int				ft_find_flag(char c, t_chain *elem)
 			(elem->flag)->apos = 1;
 		else if (c == '#')
 			(elem->flag)->hash = 1;
-		else if (c == '*')
-			(elem->flag)->star = 1;
 		return (1);
 	}
 	else
@@ -44,14 +42,7 @@ const char		*ft_find_width(const char *format, t_chain *elem)
 	y = 0;
 	while (ft_isdigit(format[y]))
 		y++;
-	if (format[y] == '$')
-	{
-		(elem->flag)->wdol = ft_atoi(format);
-		g_dollar = 1;
-		return (&format[y + 1]);
-	}
-	else
-		elem->width = ft_atoi(format);
+	elem->width = ft_atoi(format);
 	return (&format[y]);
 }
 
@@ -62,17 +53,8 @@ const char		*ft_find_precision(const char *format, t_chain *elem)
 	y = 1;
 	while (ft_isdigit(format[y]))
 		y++;
-	if (format[y] == '$')
-	{
-		elem->pdol = ft_atoi(&format[1]);
-		g_dollar = 1;
-		return (&format[y + 1]);
-	}
-	else
-	{
-		elem->give_p = 1;
-		elem->prec = ft_atoi(&format[1]);
-	}
+	elem->give_p = 1;
+	elem->prec = ft_atoi(&format[1]);
 	return (&format[y]);
 }
 
@@ -109,7 +91,12 @@ int				ft_is_conv(char c, t_chain *elem)
 		}
 		i++;
 	}
-	elem->conv = c;
-	elem->f = &ft_error_handler;
-	return (0);
+	if (c)
+	{
+		elem->conv = c;
+		elem->f = &ft_error_handler;
+		return (1);
+	}
+	else
+		return (0);
 }
