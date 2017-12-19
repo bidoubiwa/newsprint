@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 08:35:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 22:29:34 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/19 21:32:27 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,20 @@ int		main(void)
 	len = printf("{%05s}", "abc");
 
 */
-	ft_printf("%-30d %-30d %-30d\n%-30d %-30d %-30d\n", 123, 456, 789, 1235, 58962,123875);
-	len = ft_printf("{%10.3S}\n是一只猫", L"我是一只猫。");
+//	ft_printf("%-30d %-30d %-30d\n%-30d %-30d %-30d\n", 123, 456, 789, 1235, 58962,123875);
+	len = ft_printf("%p, %.p\n", 0, 0);
 	printf("len : %d\n", len);
-	len = printf("{%.1S}\n", L"我是一只猫。");
+	len = printf("%p, %.p\n", 0, 0);
 	printf("len : %d\n", len);
+	len = ft_printf("%.0x, %.x\n", 0, 0);
+	printf("len : %d\n", len);
+	len = printf("%#.0x, %#.x\n", 0, 0);
+	printf("len : %d\n", len);
+
+	//len = ft_printf("{%10.3S}\n", L"我是一只猫。");
+	//printf("len : %d\n", len);
+	//len = printf("{%10.3S}\n", L"我是一只猫。");
+	//printf("len : %d\n", len);
 //	len = printf("{%S}\n", L"我是一只猫。");
 //	printf("len : %d\n", len);
 	
@@ -85,7 +94,7 @@ int		main(void)
 
 //	ft_printf("coucou 漢字: %100S|\n", L"漢漢字漢字漢字漢字漢字字");
 //	printf("coucou 漢字: %100S|\n",  L"漢漢字漢字漢字漢字漢字字");
-	ft_printf("coucou : %C\n", 28450);
+//	ft_printf("coucou : %C\n", 28450);
 
 	//printf("coucou");
 	//printf("coucou : %10S\n", L"漢字");

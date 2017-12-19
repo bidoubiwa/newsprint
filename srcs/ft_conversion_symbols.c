@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 18:45:57 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 18:22:05 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/19 21:17:02 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*ft_0x_hexa(char *show, char c)
 
 	i = 0;
 	y = 0;
-	if (ft_atoi_base_ll(show,16) == 0 && ft_tolower(c) == 'x')
+	if (ft_atoi_base_ll(show,16) == 0 && (ft_tolower(c) == 'x' || c == 'p'))
 		return (show);
 	if (!(new = ft_strnew(ft_strlen(show) + 2)))
 		return (NULL);
