@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:49 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 20:30:50 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 13:29:52 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char		*ft_write_before_zero(char *new, t_chain *elem)
 
 	y = 0;
 	i = 0;
-	tmp = ft_start_digit(elem->show);
+	tmp = ft_start_digit(elem->show, elem);
 	while (i < tmp - elem->show)
 		new[i++] = elem->show[y++];
 	while (i < (elem->width - ft_strlen(elem->show) + tmp - elem->show))

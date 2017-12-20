@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:03:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 21:09:13 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 12:54:09 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char				*ft_plus(t_chain *elem, char c);
 char				*ft_precision(t_chain *elem);
 char				*ft_width(t_chain *elem, t_flag *flag);
 char				*ft_maj(t_chain *elem);
-char				*ft_0x_hexa(char *show, char c);
+char				*ft_0x_hexa(char *show, char c, t_chain *elem);
 char				*ft_0_octal(char *show);
 char				*ft_hash(t_chain *elem);
 int					ft_str_modifier(t_chain *elem, t_flag *flag);
@@ -100,7 +100,7 @@ t_chain				*ft_get_dollar_order(t_chain *chain);
 /* UTILITY FUNCTIONS */
 int					ft_is_decimal(char b);
 int					ft_is_integer(char b);
-char				*ft_start_digit(char *str);
+char				*ft_start_digit(char *str, t_chain *elem);
 int					ft_get_base(char c);
 int					ft_need_toupper(char c);
 int					ft_is_w_char(t_chain *elem);

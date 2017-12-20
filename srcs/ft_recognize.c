@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 10:51:07 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 19:03:28 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 12:52:15 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int		ft_get_base(char c)
 	return (10);
 }
 
-char	*ft_start_digit(char *str)
+char	*ft_start_digit(char *str, t_chain *elem)
 {
-	if (str[0] && str[1])
+	if (str[0] && str[1] && ft_tolower(elem->conv) != 'o')
 	{
 		if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
 			return (&str[2]);

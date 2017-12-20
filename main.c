@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 08:35:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/19 21:32:27 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 12:48:53 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int		main(void)
 
 */
 //	ft_printf("%-30d %-30d %-30d\n%-30d %-30d %-30d\n", 123, 456, 789, 1235, 58962,123875);
-	len = ft_printf("%p, %.p\n", 0, 0);
+	len = ft_printf("%#.3o\n", 1);
 	printf("len : %d\n", len);
-	len = printf("%p, %.p\n", 0, 0);
+	len = ft_printf("%#3o\n", 1);
 	printf("len : %d\n", len);
-	len = ft_printf("%.0x, %.x\n", 0, 0);
+	len = printf("%#.3o\n", 1);
 	printf("len : %d\n", len);
-	len = printf("%#.0x, %#.x\n", 0, 0);
+	len = printf("%#3o\n", 1);
 	printf("len : %d\n", len);
 
 	//len = ft_printf("{%10.3S}\n", L"我是一只猫。");

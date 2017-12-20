@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:03 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/19 21:30:43 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 12:53:27 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int	ft_prec_null_val_null(t_chain *elem)
 	int 	base;
 	
 	base = ft_get_base(elem->conv);
-	if (elem->prec == 0 && elem->conv == 'p' && ft_atoi_base_ll(elem->show, base) == 0)
+	if (elem->prec == 0 && elem->give_p == 1 && 
+			elem->conv == 'p' && ft_atoi_base_ll(elem->show, base) == 0)
 	{
 		free(elem->show);
 		elem->show = ft_strdup("0x");
@@ -81,7 +82,7 @@ static char	*ft_prec_on_integer(t_chain *elem)
 	(elem->flag)->zero = 0;
 	if (ft_prec_null_val_null(elem))
 		return (ft_strnew(0));
-	tmp = ft_start_digit(elem->show);
+	tmp = ft_start_digit(elem->show, elem);
 	len_src = ft_strlen(tmp);
 	if (elem->prec > len_src)
 	{

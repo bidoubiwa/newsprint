@@ -6,21 +6,24 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 18:45:57 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/19 21:17:02 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 12:46:23 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hprintf.h"
 
-char		*ft_0x_hexa(char *show, char c)
+char		*ft_0x_hexa(char *show, char c, t_chain *elem)
 {
 	int		y;
 	int		i;
 	char	*new;
+	int		res;
 
+	res = ft_atoi_base_ll(show, 16);
 	i = 0;
 	y = 0;
-	if (ft_atoi_base_ll(show,16) == 0 && (ft_tolower(c) == 'x' || c == 'p'))
+	if (res == 0 && (ft_tolower(c) == 'x' || (c == 'p' && elem->give_p &&
+					!elem->prec)))
 		return (show);
 	if (!(new = ft_strnew(ft_strlen(show) + 2)))
 		return (NULL);
@@ -57,9 +60,8 @@ char		*ft_hash(t_chain *elem)
 
 	c = elem->conv;
 	if (ft_tolower(c) == 'x' || elem->conv == 'p')
-		return (ft_0x_hexa(elem->show, elem->conv));
+		return (ft_0x_hexa(elem->show, elem->conv, elem));
 	else if (ft_tolower(c) == 'o')
 		return (ft_0_octal(elem->show));
 	return (elem->show);
 }
-
