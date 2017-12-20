@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:03 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/20 12:53:27 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:03:01 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,23 @@ static int	ft_prec_null_val_null(t_chain *elem)
 		elem->show = ft_strdup("0x");
 		return (0);
 	}
+	else if (elem->prec == 0 && ft_is_decimal(elem->conv) && (elem->flag)->plus == 1 
+			&& ft_atoi_base_ll(elem->show, base) == 0)
+	{
+		free(elem->show);
+		elem->show = ft_strdup("+");
+		return (0);
+
+	}
+	else if (elem->prec == 0 && ft_is_decimal(elem->conv) && (elem->flag)->blank == 1 
+			&& ft_atoi_base_ll(elem->show, base) == 0)
+	{
+		free(elem->show);
+		elem->show = ft_strdup(" ");
+		return (0);
+
+	}
+
 	else if (elem->prec == 0 &&  !((elem->flag)->hash && ft_tolower(elem->conv) == 'o')
 			&& ft_atoi_base_ll(elem->show, base) == 0)
 	{

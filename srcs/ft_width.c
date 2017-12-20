@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:28:49 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/20 13:29:52 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 21:14:24 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ char			*ft_width(t_chain *elem, t_flag *flag)
 {
 	char	*new;
 
-	if (elem->conv == 'C' || elem->conv == 'S' || ((elem->conv == 's'
-					|| elem->conv == 'c') && elem->len == 'l'))
+	if (ft_is_w_char(elem))
 		return (ft_width_w_char(elem, flag));
 	if (!(new = ft_strnew(elem->width)))
 		return (elem->show);

@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 20:57:42 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/19 21:00:44 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 21:16:03 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char		*ft_prec_on_w(t_chain *elem)
 	size_t	i;
 	int		carac;
 	int		byte;
+	char	*tmp;
 
 	i = 0;
 	carac = 0;
@@ -35,7 +36,7 @@ char		*ft_prec_on_w(t_chain *elem)
 	while ( i < elem->prec && elem->show[carac])
 	{
 		byte = 0;
-		if (elem->show[carac] == '0')
+		if (elem->show[carac] == '0' || MB_CUR_MAX == 1)
 			byte++;
 		else if (elem->show[carac] == '1')
 			byte = ft_number_byte_for_carac(elem->show, carac);
@@ -44,8 +45,10 @@ char		*ft_prec_on_w(t_chain *elem)
 	}
 	if (i > elem->prec)
 		i -= byte;
-	free(elem->show);
+	tmp = elem->show;
 	elem->show = ft_strsub(elem->show, 0, i * 8);
 	elem->nbr_carac = i;
+	elem->nbr_byte = i;
+	free(tmp);
 	return (elem->show);
 }

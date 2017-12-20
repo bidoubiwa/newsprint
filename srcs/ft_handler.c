@@ -6,24 +6,24 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:41:18 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 20:51:30 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/21 00:20:23 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hprintf.h"
 
-/*void	show_maillon(t_chain *tmp)
+void	show_maillon(t_chain *tmp)
 {
-	t_flag	*flag;
+		t_flag	*flag;
 
 		flag = tmp->flag;
 		printf("--------------------------\n");
 		printf("FLAGS :\n");
-		printf("- : %d\n  : %d\n+ : %d\n0 : %d\n' : %d\n# : %d\n* : %d\n$ : %d\n", flag->left, flag->blank, flag->plus,  flag->zero, flag->apos, flag->hash, flag->star, flag->wdol);
+		printf("- : %d\n  : %d\n+ : %d\n0 : %d\n' : %d\n# : %d\n", flag->left, flag->blank, flag->plus,  flag->zero, flag->apos, flag->hash);
 		printf("INFO : \n");
-		printf("width : %zu\nprec : %zu\nlen : %c\nconv : %c\nmaj : %d\ndollar : %d\njust_show : %d\nnbr_carac : %zu\nshow : %s\n",
-				tmp->width, tmp->prec, tmp->len, tmp->conv, tmp->maj, tmp->pdol,tmp->just_show, tmp->nbr_carac, tmp->show);	
-}*/
+		printf("width : %zu\nprec : %zu\nlen : %c\nconv : %c\nmaj : %d\njust_show : %d\nnbr_carac : %zu\nshow : %s\n",
+				tmp->width, tmp->prec, tmp->len, tmp->conv, tmp->maj, tmp->just_show, tmp->nbr_carac, tmp->show);	
+}
 
 static int		ft_putchar_w(char *begin, int len)
 {
@@ -101,12 +101,12 @@ int				ft_show_all(t_chain *elem)
 	total = 0;
 	while (elem)
 	{
-		if (!elem->show)
+		/*if (!elem->show)
 		{
 			write(1, "(null)", 6);
 			elem->nbr_carac = 6;
-		}
-		else if (ft_show_char_null(elem) || ft_null_w_char(elem))
+		}*/
+		if (ft_show_char_null(elem) || ft_null_w_char(elem))
 			;
 		else if (elem->show && ft_is_w_char(elem))
 			ft_show_char_w(elem);
@@ -128,22 +128,27 @@ int				ft_handler(va_list ap, t_chain *chain)
 	int			total;
 
 	test = chain;
-	begin = chain;
-/*	while (test)
+	/*while (test)
 	{
 		show_maillon(test);
 		test = test->next;
 	}*/
+	begin = chain;
 	while (chain)
 	{
 		if (!chain->just_show)
 		{
 			if (chain->f(chain, ap) == -1)
-				return (-1);
+			{
+				dprintf(2,"JE PASSE PAR LA ?\n");
+				total = ft_show_error(chain, begin);
+				dprintf(2,"APRES RET\n");
+				return (total);
+			}
+			dprintf(2,"APRES RET 222`\n");
 		}
 		chain = chain->next;
 	}
-
 	total = ft_show_all(begin);
 	va_end(ap);
 	return (total);

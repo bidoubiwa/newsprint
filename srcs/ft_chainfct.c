@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 13:43:46 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 19:53:01 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 22:14:08 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void			ft_setup_chain_info(t_chain *elem, t_flag *flag)
 	flag->hash = 0;
 	elem->just_show = 0;
 	elem->nbr_carac = 0;
+	elem->error = 0;
 	elem->width = 0;
 	elem->give_p = 0;
 	elem->prec = 0;
@@ -65,39 +66,6 @@ int				ft_show_only_parser(const char *format, size_t len, t_chain **c)
 	ft_lstadd_after(elem, c);
 	return (1);
 }
-
-/*t_chain		*ft_get_dollar_order(t_chain *chain)
-{
-	t_chain		*current;
-	t_chain		*previous;
-	t_chain		*tmp;
-	int			change;
-
-	change = 1;
-	current = chain;
-	previous = NULL;
-	while (change)
-	{
-		change = 0;
-		while (current && current->next)
-		{
-			tmp = current->next;
-			if (current->dollar > tmp->dollar)
-			{
-				if (begin == current)
-					begin = tmp;
-				if (previous)
-					previous->next = tmp;
-				current->next = tmp->next;
-				tmp->next = current;
-				change = 1;
-			}
-			else
-				current = current->next;
-		}
-	}
-	return (begin);
-}*/
 
 t_chain			*ft_create_elem(void)
 {

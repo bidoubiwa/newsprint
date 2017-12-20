@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 17:10:45 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 20:22:29 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 23:59:59 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ static char		*ft_w_char_handler(wchar_t wc, t_chain *elem)
 	char			*(*f)(unsigned long long, unsigned int);
 
 	bin = NULL;
-	if (!(wc <= 0x10ffff && wc >= 0 && (wc <= 0xd7ff || wc >= 0xe000)))
+//	printf("CUR : %d, wc : %d\n", MB_CUR_MAX, wc);
+	if (!(wc <= 0x10ffff && wc >= 0 && (wc <= 0xd7ff || wc >= 0xe000)) && 
+			(MB_CUR_MAX != 1 || ft_tolower(elem->conv) == 'c'))
 		return (NULL);
 	f = &ft_itoa_base_ll;
 	i = 0;
@@ -65,6 +67,14 @@ static char		*ft_w_char_handler(wchar_t wc, t_chain *elem)
 	{
 		bin = ft_itoa_base(wc + 0x80, 2);
 		bin[0] = '0';
+	}
+	else if (wc > 127 && wc < 256 && MB_CUR_MAX == 1)
+		bin = ft_itoa_base(wc, 2);
+	else if (MB_CUR_MAX == 1 && ft_tolower(elem->conv) == 's')
+	{
+//		printf("show : %s, len : %lu, prec : %zu\n", elem->show, ft_strlen(elem->show) / 8, elem->prec);
+		if (elem->prec < (ft_strlen(elem->show) / 8) + 1 && elem->give_p)
+			bin = ft_itoa_base(wc, 2);	
 	}
 	else if (wc <= 2047 && MB_CUR_MAX > 1)
 		bin = ft_strjoin_clr(ft_itoa_base((wc >> 6) + 0xC0, 2),

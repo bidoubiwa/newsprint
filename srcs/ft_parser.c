@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:09:11 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/18 19:53:36 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 23:10:35 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ const char	*ft_parser(const char *format, t_chain *elem, t_chain **chain)
 	}
 	if (!elem->conv)
 		return (NULL);
-//	ft_lstadd_after(elem, chain);
 	return (format);
 }

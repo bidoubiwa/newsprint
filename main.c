@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 08:35:47 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/20 12:48:53 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/21 00:21:48 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		main(void)
 	char 	*locale;
 	int		len;
 
-	locale = setlocale(LC_ALL,"");
 //	ft_printf("CHIFFRE : %C\n", L'漢');
 //	ft_printf("CHIFFRE : %jd\n", 65280);
 //	ft_printf("CHIFFRE : %zd\n", 123456789123456);
@@ -66,7 +65,7 @@ int		main(void)
 
 */
 //	ft_printf("%-30d %-30d %-30d\n%-30d %-30d %-30d\n", 123, 456, 789, 1235, 58962,123875);
-	len = ft_printf("%#.3o\n", 1);
+/*	len = ft_printf("%#.3o\n", 1);
 	printf("len : %d\n", len);
 	len = ft_printf("%#3o\n", 1);
 	printf("len : %d\n", len);
@@ -74,14 +73,63 @@ int		main(void)
 	printf("len : %d\n", len);
 	len = printf("%#3o\n", 1);
 	printf("len : %d\n", len);
+*/
 
-	//len = ft_printf("{%10.3S}\n", L"我是一只猫。");
-	//printf("len : %d\n", len);
-	//len = printf("{%10.3S}\n", L"我是一只猫。");
-	//printf("len : %d\n", len);
-//	len = printf("{%S}\n", L"我是一只猫。");
-//	printf("len : %d\n", len);
 	
+	int i = 1;
+	int j = 1;
+	wchar_t	s[4];
+
+	locale = setlocale(LC_ALL,"");
+//	len = ft_printf("%d\n", 100);
+//	len = ft_printf("%C", 0x11ffff);
+//	len = printf("%C", 0x11ffff);
+//	len = ft_printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
+	len =	ft_printf("%C", 0x11ffff);
+	printf("len : %d\n", len);
+	len = printf("%C", 0x11ffff);
+//	len = printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
+	printf("len : %d\n", len);
+	/*
+ * s[0] = 0x53;
+	s[1] = 0x3abc;
+	s[2] = 0x81000;
+	s[3] = '\0';
+	//i = ft_printf("%C", 0x11ffff);
+	//j = printf("%C", 0x11ffff);
+	//i = ft_printf("%lc", 254);
+	//j = printf("%lc", 254);
+	
+	i = ft_printf("%6C et coco %C titi %C tyty", 3250, 0xd800, 'u');
+	j = ft_printf("%6C et coco %C titi %C tyty", 3250, 0xd800, 'u');
+	//i = ft_printf("\n%8C et coco %C titi %lc\n", 3250, 0x11ffff, 'a');
+	//j = printf("\n%8C et coco %C titi %lc\n", 3250, 0x11ffff, 'a');
+	//i = ft_printf("%---10.5ls\n", s);
+	//j = printf("%---10.5ls\n", s);
+	//i = ft_printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
+	//j = printf("ya%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
+	printf("\nretour ft_printf = %d\nretour printf = %d\n", i, j);
+	len = ft_printf("%lc", 254);
+	printf("len : %d\n", len);
+	len = printf("%lc", 254);
+	printf("len : %d\n", len);
+
+	len = ft_printf("%   .0D\n", 0);
+	printf("len : %d\n", len);
+	len = printf("%   .0D\n", 0);
+	printf("len : %d\n", len);
+	len = ft_printf("toto%.0d et %+.i et  %   .0D !!!", 0, 0, 0);
+	printf("len : %d\n", len);
+	len = printf("toto%.0d et %+.i et  %   .0D !!!", 0, 0, 0);
+	printf("len : %d\n", len);
+
+	len = ft_printf("{%10.3S}\n", L"我是一只猫。");
+	printf("len : %d\n", len);
+	len = printf("{%10.3S}\n", L"我是一只猫。");
+	printf("len : %d\n", len);
+	len = printf("{%S}\n", L"我是一只猫。");
+	printf("len : %d\n", len);
+*/	
 //	len = ft_printf("@OCTAL faux: %5.o %5.0o\n", 0, 0);
 //	printf("len : %d\n", len);
 //	len = printf("OCTAL @VRAI: %5.o %5.0o\n", 0, 0);

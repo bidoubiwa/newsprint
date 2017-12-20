@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:30:25 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/17 18:13:02 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/21 00:29:35 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,16 @@ int				ft_printf(const char *restrict format, ...)
 	va_start(ap, format);
 	chain = NULL;
 	if (!(ft_read_format(format, &chain)))
-		return (0);
+	{
+		//if (chain)
+			//ft_lstfree(chain);
+		return (-1);
+	}
+	dprintf(2, "TOUTOU VA BIE\n");
+//	show_maillon(chain);
 	ret = ft_handler(ap, chain);
+	dprintf(2,"PRINTF\n\n");
+	if (chain)
+		ft_lstfree(chain);
 	return (ret);
 }

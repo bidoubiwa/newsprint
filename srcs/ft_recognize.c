@@ -6,7 +6,7 @@
 /*   By: cvermand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 10:51:07 by cvermand          #+#    #+#             */
-/*   Updated: 2017/12/20 12:52:15 by cvermand         ###   ########.fr       */
+/*   Updated: 2017/12/20 13:49:44 by cvermand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_start_digit(char *str, t_chain *elem)
 int		ft_is_integer(char b)
 {
 	if (ft_tolower(b) == 'd' || b == 'i' || ft_tolower(b) == 'o'
-					|| b == 'u' || ft_tolower(b) == 'x' || b == 'p')
+					|| ft_tolower(b) == 'u' || ft_tolower(b) == 'x' || b == 'p')
 		return (1);
 	return (0);
 }
